@@ -5,7 +5,6 @@
     clippy::unnecessary_wraps
 )]
 
-use anyhow::Result;
 use anyhow::{anyhow, Result};
 use log::*;
 use vulkanalia::loader::{LibloadingLoader, LIBRARY};
@@ -105,7 +104,7 @@ impl App {
     unsafe fn create(window: &Window) -> Result<Self> {
         let loader = LibloadingLoader::new(LIBRARY)?;
         let entry = Entry::new(loader).map_err(|b| anyhow!("{}", b))?;
-        let instance = create_instance(window, &entry)?;
+        let instance = Self::create_instance(window, &entry)?;
         Ok(Self { entry, instance })
     }
 
